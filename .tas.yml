@@ -10,7 +10,10 @@ modifiers:
     config: cnf/mocha.ini
 postmerge:
   pattern:
-    - "./test/**/*.spec.ts"
+  - "./test/IO.ts"
+  - "./test/Json.ts"
+  - "./test/Ring.ts"
+  - "./test/Foldable.ts"
   strategy:
     threshold: <5|100s|30m|6h>
     type: <commit|time>
