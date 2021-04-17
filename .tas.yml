@@ -14,6 +14,7 @@ postmerge:
   - "./test/Json.ts"
   - "./test/Ring.ts"
   - "./test/Foldable.ts"
+  - "./test/Date.ts"
   strategy:
     threshold: <5|100s|30m|6h>
     type: <commit|time>
@@ -22,6 +23,7 @@ premerge:
   - "./test/Json.ts"
   - "./test/Ring.ts"
   - "./test/Foldable.ts"
+  - "./test/Date.ts"
 stability:
   consecutive_runs: 5
 prerun:
