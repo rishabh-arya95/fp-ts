@@ -1,12 +1,12 @@
 ---
-framework: mocha
+framework: jest
 docker:
   auth:
     password: $DOCKERHUB_PASSWORD12
     username: mydockerhub-user
   image: "lambdatest/<language>:<version TAG>"
 modifiers:
-  - type: mocha
+  - type: jest
     config: cnf/mocha.ini
 postmerge:
   pattern:
