@@ -1,6 +1,6 @@
 ---
 title: Semigroup.ts
-nav_order: 84
+nav_order: 91
 parent: Modules
 ---
 
@@ -66,7 +66,6 @@ Added in v2.0.0
 - [instances](#instances)
   - [first](#first)
   - [last](#last)
-  - [semigroupVoid](#semigroupvoid)
   - [~~getFirstSemigroup~~](#getfirstsemigroup)
   - [~~getFunctionSemigroup~~](#getfunctionsemigroup)
   - [~~getLastSemigroup~~](#getlastsemigroup)
@@ -76,6 +75,7 @@ Added in v2.0.0
   - [~~semigroupProduct~~](#semigroupproduct)
   - [~~semigroupString~~](#semigroupstring)
   - [~~semigroupSum~~](#semigroupsum)
+  - [~~semigroupVoid~~](#semigroupvoid)
 - [type classes](#type-classes)
   - [Semigroup (interface)](#semigroup-interface)
 - [utils](#utils)
@@ -195,7 +195,7 @@ Added in v2.10.0
 
 ## ~~getDualSemigroup~~
 
-Use `reverse` instead.
+Use [`reverse`](#reverse) instead.
 
 **Signature**
 
@@ -207,7 +207,7 @@ Added in v2.0.0
 
 ## ~~getIntercalateSemigroup~~
 
-Use `intercalate` instead.
+Use [`intercalate`](#intercalate) instead.
 
 **Signature**
 
@@ -219,7 +219,7 @@ Added in v2.5.0
 
 ## ~~getStructSemigroup~~
 
-Use `struct` instead.
+Use [`struct`](#struct) instead.
 
 **Signature**
 
@@ -233,7 +233,7 @@ Added in v2.0.0
 
 ## ~~getTupleSemigroup~~
 
-Use `tuple` instead.
+Use [`tuple`](#tuple) instead.
 
 **Signature**
 
@@ -305,7 +305,7 @@ Added in v2.10.0
 
 ## ~~getJoinSemigroup~~
 
-Use `max` instead.
+Use [`max`](#max) instead.
 
 **Signature**
 
@@ -317,7 +317,7 @@ Added in v2.0.0
 
 ## ~~getMeetSemigroup~~
 
-Use `min` instead.
+Use [`min`](#min) instead.
 
 **Signature**
 
@@ -369,19 +369,9 @@ assert.deepStrictEqual(S.last<number>().concat(1, 2), 2)
 
 Added in v2.10.0
 
-## semigroupVoid
-
-**Signature**
-
-```ts
-export declare const semigroupVoid: Semigroup<void>
-```
-
-Added in v2.0.0
-
 ## ~~getFirstSemigroup~~
 
-Use `first` instead.
+Use [`first`](#first) instead.
 
 **Signature**
 
@@ -393,7 +383,7 @@ Added in v2.0.0
 
 ## ~~getFunctionSemigroup~~
 
-Use `function.getSemigroup` instead.
+Use [`getSemigroup`](./function.ts.html#getSemigroup) instead.
 
 **Signature**
 
@@ -405,7 +395,7 @@ Added in v2.0.0
 
 ## ~~getLastSemigroup~~
 
-Use `last` instead.
+Use [`last`](#last) instead.
 
 **Signature**
 
@@ -417,7 +407,7 @@ Added in v2.0.0
 
 ## ~~getObjectSemigroup~~
 
-Use `object.getAssignSemigroup` instead.
+Use [`getAssignSemigroup`](./struct.ts.html#getAssignSemigroup) instead.
 
 **Signature**
 
@@ -429,7 +419,7 @@ Added in v2.0.0
 
 ## ~~semigroupAll~~
 
-Use `boolean.SemigroupAll` instead.
+Use [`SemigroupAll`](./boolean.ts.html#SemigroupAll) instead.
 
 **Signature**
 
@@ -441,7 +431,7 @@ Added in v2.0.0
 
 ## ~~semigroupAny~~
 
-Use `boolean.SemigroupAny` instead.
+Use [`SemigroupAny`](./boolean.ts.html#SemigroupAny) instead.
 
 **Signature**
 
@@ -453,7 +443,7 @@ Added in v2.0.0
 
 ## ~~semigroupProduct~~
 
-Use `number.SemigroupProduct` instead.
+Use [`SemigroupProduct`](./number.ts.html#SemigroupProduct) instead.
 
 **Signature**
 
@@ -465,7 +455,7 @@ Added in v2.0.0
 
 ## ~~semigroupString~~
 
-Use `string.Semigroup` instead.
+Use [`Semigroup`](./string.ts.html#Semigroup) instead.
 
 **Signature**
 
@@ -477,12 +467,24 @@ Added in v2.0.0
 
 ## ~~semigroupSum~~
 
-Use `number.SemigroupSum` instead.
+Use [`SemigroupSum`](./number.ts.html#SemigroupSum) instead.
 
 **Signature**
 
 ```ts
 export declare const semigroupSum: Semigroup<number>
+```
+
+Added in v2.0.0
+
+## ~~semigroupVoid~~
+
+Use `void` module instead.
+
+**Signature**
+
+```ts
+export declare const semigroupVoid: Semigroup<void>
 ```
 
 Added in v2.0.0
@@ -529,7 +531,7 @@ Added in v2.10.0
 
 ## ~~fold~~
 
-Use `concatAll` instead.
+Use [`concatAll`](#concatall) instead.
 
 **Signature**
 

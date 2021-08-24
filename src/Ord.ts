@@ -11,7 +11,7 @@
  */
 import { Contravariant1 } from './Contravariant'
 import { Eq, eqStrict } from './Eq'
-import { pipe } from './function'
+import { constant, constTrue, pipe } from './function'
 import { Monoid } from './Monoid'
 import { Ordering } from './Ordering'
 import { Semigroup } from './Semigroup'
@@ -228,6 +228,20 @@ export const Contravariant: Contravariant1<URI> = {
 // utils
 // -------------------------------------------------------------------------------------
 
+/**
+ * @since 2.11.0
+ */
+export const trivial: Ord<unknown> = {
+  equals: constTrue,
+  compare: constant(0)
+}
+
+/**
+ * @since 2.11.0
+ */
+export const equals = <A>(O: Ord<A>) => (second: A) => (first: A): boolean =>
+  first === second || O.compare(first, second) === 0
+
 // TODO: curry in v3
 /**
  * Test whether one value is _strictly less than_ another
@@ -304,8 +318,10 @@ export const between = <A>(O: Ord<A>): ((low: A, hi: A) => (a: A) => boolean) =>
 // deprecated
 // -------------------------------------------------------------------------------------
 
+// tslint:disable: deprecation
+
 /**
- * Use `tuple` instead.
+ * Use [`tuple`](#tuple) instead.
  *
  * @category combinators
  * @since 2.0.0
@@ -316,7 +332,7 @@ export const getTupleOrd: <T extends ReadonlyArray<Ord<any>>>(
 ) => Ord<{ [K in keyof T]: T[K] extends Ord<infer A> ? A : never }> = tuple
 
 /**
- * Use `reverse` instead.
+ * Use [`reverse`](#reverse) instead.
  *
  * @category combinators
  * @since 2.0.0
@@ -325,7 +341,7 @@ export const getTupleOrd: <T extends ReadonlyArray<Ord<any>>>(
 export const getDualOrd = reverse
 
 /**
- * Use `Contravariant` instead.
+ * Use [`Contravariant`](#contravariant) instead.
  *
  * @category instances
  * @since 2.0.0
@@ -344,7 +360,7 @@ const strictOrd = {
 }
 
 /**
- * Use `boolean.Ord` instead.
+ * Use [`Ord`](./boolean.ts.html#ord) instead.
  *
  * @category instances
  * @since 2.0.0
@@ -353,7 +369,7 @@ const strictOrd = {
 export const ordBoolean: Ord<boolean> = strictOrd
 
 /**
- * Use `string.Ord` instead.
+ * Use [`Ord`](./string.ts.html#ord) instead.
  *
  * @category instances
  * @since 2.0.0
@@ -362,7 +378,7 @@ export const ordBoolean: Ord<boolean> = strictOrd
 export const ordString: Ord<string> = strictOrd
 
 /**
- * Use `number.Ord` instead.
+ * Use [`Ord`](./number.ts.html#ord) instead.
  *
  * @category instances
  * @since 2.0.0
@@ -371,7 +387,7 @@ export const ordString: Ord<string> = strictOrd
 export const ordNumber: Ord<number> = strictOrd
 
 /**
- * Use `Date.Ord` instead.
+ * Use [`Ord`](./Date.ts.html#ord) instead.
  *
  * @category instances
  * @since 2.0.0
@@ -380,7 +396,6 @@ export const ordNumber: Ord<number> = strictOrd
 export const ordDate: Ord<Date> =
   /*#__PURE__*/
   pipe(
-    // tslint:disable-next-line: deprecation
     ordNumber,
     /*#__PURE__*/
     contramap((date) => date.valueOf())

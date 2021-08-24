@@ -1,6 +1,6 @@
 ---
 title: Functor.ts
-nav_order: 38
+nav_order: 42
 parent: Modules
 ---
 
@@ -381,6 +381,8 @@ export interface FunctorComposition<F, G> {
 Added in v2.0.0
 
 ## ~~getFunctorComposition~~
+
+Use [`map`](#map) instead.
 
 **Signature**
 
