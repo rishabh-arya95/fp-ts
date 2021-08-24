@@ -1,6 +1,6 @@
 ---
 title: Ord.ts
-nav_order: 65
+nav_order: 70
 parent: Modules
 ---
 
@@ -47,12 +47,14 @@ Added in v2.0.0
 - [utils](#utils)
   - [between](#between)
   - [clamp](#clamp)
+  - [equals](#equals)
   - [geq](#geq)
   - [gt](#gt)
   - [leq](#leq)
   - [lt](#lt)
   - [max](#max)
   - [min](#min)
+  - [trivial](#trivial)
 
 ---
 
@@ -108,7 +110,7 @@ Added in v2.10.0
 
 ## ~~getDualOrd~~
 
-Use `reverse` instead.
+Use [`reverse`](#reverse) instead.
 
 **Signature**
 
@@ -120,7 +122,7 @@ Added in v2.0.0
 
 ## ~~getTupleOrd~~
 
-Use `tuple` instead.
+Use [`tuple`](#tuple) instead.
 
 **Signature**
 
@@ -276,7 +278,7 @@ Added in v2.0.0
 
 ## ~~ordBoolean~~
 
-Use `boolean.Ord` instead.
+Use [`Ord`](./boolean.ts.html#ord) instead.
 
 **Signature**
 
@@ -288,7 +290,7 @@ Added in v2.0.0
 
 ## ~~ordDate~~
 
-Use `Date.Ord` instead.
+Use [`Ord`](./Date.ts.html#ord) instead.
 
 **Signature**
 
@@ -300,7 +302,7 @@ Added in v2.0.0
 
 ## ~~ordNumber~~
 
-Use `number.Ord` instead.
+Use [`Ord`](./number.ts.html#ord) instead.
 
 **Signature**
 
@@ -312,7 +314,7 @@ Added in v2.0.0
 
 ## ~~ordString~~
 
-Use `string.Ord` instead.
+Use [`Ord`](./string.ts.html#ord) instead.
 
 **Signature**
 
@@ -324,7 +326,7 @@ Added in v2.0.0
 
 ## ~~ord~~
 
-Use `Contravariant` instead.
+Use [`Contravariant`](#contravariant) instead.
 
 **Signature**
 
@@ -373,6 +375,16 @@ export declare const clamp: <A>(O: Ord<A>) => (low: A, hi: A) => (a: A) => A
 ```
 
 Added in v2.0.0
+
+## equals
+
+**Signature**
+
+```ts
+export declare const equals: <A>(O: Ord<A>) => (second: A) => (first: A) => boolean
+```
+
+Added in v2.11.0
 
 ## geq
 
@@ -445,3 +457,13 @@ export declare const min: <A>(O: Ord<A>) => (first: A, second: A) => A
 ```
 
 Added in v2.0.0
+
+## trivial
+
+**Signature**
+
+```ts
+export declare const trivial: Ord<unknown>
+```
+
+Added in v2.11.0

@@ -1,6 +1,6 @@
 ---
 title: Monoid.ts
-nav_order: 60
+nav_order: 64
 parent: Modules
 ---
 
@@ -56,7 +56,6 @@ Added in v2.0.0
   - [~~getJoinMonoid~~](#getjoinmonoid)
   - [~~getMeetMonoid~~](#getmeetmonoid)
 - [instances](#instances)
-  - [monoidVoid](#monoidvoid)
   - [~~getEndomorphismMonoid~~](#getendomorphismmonoid)
   - [~~getFunctionMonoid~~](#getfunctionmonoid)
   - [~~monoidAll~~](#monoidall)
@@ -64,6 +63,7 @@ Added in v2.0.0
   - [~~monoidProduct~~](#monoidproduct)
   - [~~monoidString~~](#monoidstring)
   - [~~monoidSum~~](#monoidsum)
+  - [~~monoidVoid~~](#monoidvoid)
 - [type classes](#type-classes)
   - [Monoid (interface)](#monoid-interface)
 - [utils](#utils)
@@ -157,7 +157,7 @@ Added in v2.10.0
 
 ## ~~getDualMonoid~~
 
-Use `reverse` instead.
+Use [`reverse`](#reverse) instead.
 
 **Signature**
 
@@ -169,7 +169,7 @@ Added in v2.0.0
 
 ## ~~getStructMonoid~~
 
-Use `struct` instead.
+Use [`struct`](#struct) instead.
 
 **Signature**
 
@@ -183,7 +183,7 @@ Added in v2.0.0
 
 ## ~~getTupleMonoid~~
 
-Use `tuple` instead.
+Use [`tuple`](#tuple) instead.
 
 **Signature**
 
@@ -249,7 +249,7 @@ Added in v2.10.0
 
 ## ~~getJoinMonoid~~
 
-Use `max` instead.
+Use [`max`](#max) instead.
 
 **Signature**
 
@@ -261,7 +261,7 @@ Added in v2.0.0
 
 ## ~~getMeetMonoid~~
 
-Use `min` instead.
+Use [`min`](#min) instead.
 
 **Signature**
 
@@ -273,21 +273,11 @@ Added in v2.0.0
 
 # instances
 
-## monoidVoid
-
-**Signature**
-
-```ts
-export declare const monoidVoid: Monoid<void>
-```
-
-Added in v2.0.0
-
 ## ~~getEndomorphismMonoid~~
 
-Use `function.getEndomorphismMonoid` instead.
+Use [`getEndomorphismMonoid`](./function.ts.html#getendomorphismmonoid) instead.
 
-**Note**. The execution order in `function.getEndomorphismMonoid` is reversed.
+**Note**. The execution order in [`getEndomorphismMonoid`](./function.ts.html#getendomorphismmonoid) is reversed.
 
 **Signature**
 
@@ -299,7 +289,7 @@ Added in v2.0.0
 
 ## ~~getFunctionMonoid~~
 
-Use `function.getMonoid` instead.
+Use [`getMonoid`](./function.ts.html#getmonoid) instead.
 
 **Signature**
 
@@ -311,7 +301,7 @@ Added in v2.0.0
 
 ## ~~monoidAll~~
 
-Use `boolean.MonoidAll` instead.
+Use [`MonoidAll`](./boolean.ts.html#monoidall) instead.
 
 **Signature**
 
@@ -323,7 +313,7 @@ Added in v2.0.0
 
 ## ~~monoidAny~~
 
-Use `boolean.MonoidAny` instead.
+Use [`MonoidAny`](./boolean.ts.html#monoidany) instead.
 
 **Signature**
 
@@ -335,6 +325,8 @@ Added in v2.0.0
 
 ## ~~monoidProduct~~
 
+Use [`MonoidProduct`](./number.ts.html#monoidproduct) instead.
+
 **Signature**
 
 ```ts
@@ -345,7 +337,7 @@ Added in v2.0.0
 
 ## ~~monoidString~~
 
-Use `string.Monoid` instead.
+Use [`Monoid`](./string.ts.html#monoid) instead.
 
 **Signature**
 
@@ -357,12 +349,24 @@ Added in v2.0.0
 
 ## ~~monoidSum~~
 
-Use `number.MonoidSum` instead.
+Use [`MonoidSum`](./number.ts.html#monoidsum) instead.
 
 **Signature**
 
 ```ts
 export declare const monoidSum: Monoid<number>
+```
+
+Added in v2.0.0
+
+## ~~monoidVoid~~
+
+Use [`Monoid`](./void.ts.html#monoid) instead.
+
+**Signature**
+
+```ts
+export declare const monoidVoid: Monoid<void>
 ```
 
 Added in v2.0.0
@@ -409,7 +413,7 @@ Added in v2.10.0
 
 ## ~~fold~~
 
-Use `concatAll` instead.
+Use [`concatAll`](#concatall) instead.
 
 **Signature**
 

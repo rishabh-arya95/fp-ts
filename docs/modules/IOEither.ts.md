@@ -1,6 +1,6 @@
 ---
 title: IOEither.ts
-nav_order: 48
+nav_order: 52
 parent: Modules
 ---
 
@@ -47,16 +47,17 @@ Added in v2.0.0
   - [filterOrElseW](#filterorelsew)
   - [flap](#flap)
   - [flatten](#flatten)
+  - [flattenW](#flattenw)
   - [fromEitherK](#fromeitherk)
   - [fromIOK](#fromiok)
   - [fromOptionK](#fromoptionk)
   - [orElse](#orelse)
+  - [orElseFirst](#orelsefirst)
+  - [orElseFirstW](#orelsefirstw)
   - [orElseW](#orelsew)
+  - [orLeft](#orleft)
   - [swap](#swap)
 - [constructors](#constructors)
-  - [fromEither](#fromeither)
-  - [fromIO](#fromio)
-  - [fromOption](#fromoption)
   - [fromPredicate](#frompredicate)
   - [left](#left)
   - [leftIO](#leftio)
@@ -103,7 +104,12 @@ Added in v2.0.0
   - [tryCatchK](#trycatchk)
 - [model](#model)
   - [IOEither (interface)](#ioeither-interface)
+- [natural transformations](#natural-transformations)
+  - [fromEither](#fromeither)
+  - [fromIO](#fromio)
+  - [fromOption](#fromoption)
 - [utils](#utils)
+  - [ApT](#apt)
   - [Do](#do)
   - [apS](#aps)
   - [apSW](#apsw)
@@ -115,6 +121,10 @@ Added in v2.0.0
   - [sequenceSeqArray](#sequenceseqarray)
   - [traverseArray](#traversearray)
   - [traverseArrayWithIndex](#traversearraywithindex)
+  - [traverseReadonlyArrayWithIndex](#traversereadonlyarraywithindex)
+  - [traverseReadonlyArrayWithIndexSeq](#traversereadonlyarraywithindexseq)
+  - [traverseReadonlyNonEmptyArrayWithIndex](#traversereadonlynonemptyarraywithindex)
+  - [traverseReadonlyNonEmptyArrayWithIndexSeq](#traversereadonlynonemptyarraywithindexseq)
   - [traverseSeqArray](#traverseseqarray)
   - [traverseSeqArrayWithIndex](#traverseseqarraywithindex)
 
@@ -142,9 +152,7 @@ Less strict version of [`alt`](#alt).
 **Signature**
 
 ```ts
-export declare const altW: <E2, B>(
-  that: Lazy<IOEither<E2, B>>
-) => <E1, A>(fa: IOEither<E1, A>) => IOEither<E2 | E1, B | A>
+export declare const altW: <E2, B>(that: Lazy<IOEither<E2, B>>) => <E1, A>(fa: IOEither<E1, A>) => IOEither<E2, B | A>
 ```
 
 Added in v2.9.0
@@ -312,7 +320,7 @@ Added in v2.4.0
 
 ## chainEitherKW
 
-Less strict version of [`chainEitherK`](#chainEitherK).
+Less strict version of [`chainEitherK`](#chaineitherk).
 
 **Signature**
 
@@ -351,7 +359,7 @@ Added in v2.10.0
 
 ## chainFirstW
 
-Less strict version of [`chainFirst`](#chainFirst).
+Less strict version of [`chainFirst`](#chainfirst).
 
 Derivable from `Chain`.
 
@@ -394,6 +402,7 @@ Added in v2.10.0
 ```ts
 export declare const filterOrElse: {
   <E, A, B extends A>(refinement: Refinement<A, B>, onFalse: (a: A) => E): (ma: IOEither<E, A>) => IOEither<E, B>
+  <E, A>(predicate: Predicate<A>, onFalse: (a: A) => E): <B extends A>(mb: IOEither<E, B>) => IOEither<E, B>
   <E, A>(predicate: Predicate<A>, onFalse: (a: A) => E): (ma: IOEither<E, A>) => IOEither<E, A>
 }
 ```
@@ -402,7 +411,7 @@ Added in v2.0.0
 
 ## filterOrElseW
 
-Less strict version of [`filterOrElse`](#filterOrElse).
+Less strict version of [`filterOrElse`](#filterorelse).
 
 **Signature**
 
@@ -410,6 +419,9 @@ Less strict version of [`filterOrElse`](#filterOrElse).
 export declare const filterOrElseW: {
   <A, B extends A, E2>(refinement: Refinement<A, B>, onFalse: (a: A) => E2): <E1>(
     ma: IOEither<E1, A>
+  ) => IOEither<E2 | E1, B>
+  <A, E2>(predicate: Predicate<A>, onFalse: (a: A) => E2): <E1, B extends A>(
+    mb: IOEither<E1, B>
   ) => IOEither<E2 | E1, B>
   <A, E2>(predicate: Predicate<A>, onFalse: (a: A) => E2): <E1>(ma: IOEither<E1, A>) => IOEither<E2 | E1, A>
 }
@@ -440,6 +452,18 @@ export declare const flatten: <E, A>(mma: IOEither<E, IOEither<E, A>>) => IOEith
 ```
 
 Added in v2.0.0
+
+## flattenW
+
+Less strict version of [`flatten`](#flatten).
+
+**Signature**
+
+```ts
+export declare const flattenW: <E1, E2, A>(mma: IOEither<E1, IOEither<E2, A>>) => IOEither<E1 | E2, A>
+```
+
+Added in v2.11.0
 
 ## fromEitherK
 
@@ -485,9 +509,31 @@ export declare const orElse: <E1, A, E2>(onLeft: (e: E1) => IOEither<E2, A>) => 
 
 Added in v2.0.0
 
+## orElseFirst
+
+**Signature**
+
+```ts
+export declare const orElseFirst: <E, B>(onLeft: (e: E) => IOEither<E, B>) => <A>(ma: IOEither<E, A>) => IOEither<E, A>
+```
+
+Added in v2.11.0
+
+## orElseFirstW
+
+**Signature**
+
+```ts
+export declare const orElseFirstW: <E1, E2, B>(
+  onLeft: (e: E1) => IOEither<E2, B>
+) => <A>(ma: IOEither<E1, A>) => IOEither<E1 | E2, A>
+```
+
+Added in v2.11.0
+
 ## orElseW
 
-Less strict version of [`orElse`](#orElse).
+Less strict version of [`orElse`](#orelse).
 
 **Signature**
 
@@ -498,6 +544,16 @@ export declare const orElseW: <E1, E2, B>(
 ```
 
 Added in v2.10.0
+
+## orLeft
+
+**Signature**
+
+```ts
+export declare const orLeft: <E1, E2>(onLeft: (e: E1) => I.IO<E2>) => <A>(fa: IOEither<E1, A>) => IOEither<E2, A>
+```
+
+Added in v2.11.0
 
 ## swap
 
@@ -511,36 +567,6 @@ Added in v2.0.0
 
 # constructors
 
-## fromEither
-
-**Signature**
-
-```ts
-export declare const fromEither: <E, A>(e: E.Either<E, A>) => IOEither<E, A>
-```
-
-Added in v2.0.0
-
-## fromIO
-
-**Signature**
-
-```ts
-export declare const fromIO: <E, A>(fa: I.IO<A>) => IOEither<E, A>
-```
-
-Added in v2.7.0
-
-## fromOption
-
-**Signature**
-
-```ts
-export declare const fromOption: <E>(onNone: Lazy<E>) => <A>(ma: Option<A>) => IOEither<E, A>
-```
-
-Added in v2.0.0
-
 ## fromPredicate
 
 **Signature**
@@ -548,6 +574,7 @@ Added in v2.0.0
 ```ts
 export declare const fromPredicate: {
   <E, A, B extends A>(refinement: Refinement<A, B>, onFalse: (a: A) => E): (a: A) => IOEither<E, B>
+  <E, A>(predicate: Predicate<A>, onFalse: (a: A) => E): <B extends A>(b: B) => IOEither<E, B>
   <E, A>(predicate: Predicate<A>, onFalse: (a: A) => E): (a: A) => IOEither<E, A>
 }
 ```
@@ -598,7 +625,7 @@ Added in v2.0.0
 
 ## fold
 
-Alias of [`matchE`](#matchE).
+Alias of [`matchE`](#matche).
 
 **Signature**
 
@@ -613,7 +640,7 @@ Added in v2.0.0
 
 ## foldW
 
-Alias of [`matchEW`](#matchEW).
+Alias of [`matchEW`](#matchew).
 
 **Signature**
 
@@ -638,7 +665,7 @@ Added in v2.0.0
 
 ## getOrElseW
 
-Less strict version of [`getOrElse`](#getOrElse).
+Less strict version of [`getOrElse`](#getorelse).
 
 **Signature**
 
@@ -673,7 +700,7 @@ Added in v2.10.0
 
 ## matchEW
 
-Less strict version of [`matchE`](#matchE).
+Less strict version of [`matchE`](#matche).
 
 **Signature**
 
@@ -895,7 +922,7 @@ Added in v2.1.0
 
 ## ~~Applicative~~
 
-Use `ApplicativePar` instead
+Use [`ApplicativePar`](#applicativepar) instead
 
 **Signature**
 
@@ -907,7 +934,7 @@ Added in v2.7.0
 
 ## ~~getApplyMonoid~~
 
-Use `Applicative.getApplicativeMonoid` instead.
+Use [`getApplicativeMonoid`](./Applicative.ts.html#getapplicativemonoid) instead.
 
 **Signature**
 
@@ -919,10 +946,7 @@ Added in v2.0.0
 
 ## ~~getApplySemigroup~~
 
-Use `Apply.getApplySemigroup` instead.
-
-Semigroup returning the left-most `Left` value. If both operands are `Right`s then the inner values
-are concatenated using the provided `Semigroup`
+Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
 
 **Signature**
 
@@ -934,7 +958,7 @@ Added in v2.0.0
 
 ## ~~getIOValidation~~
 
-Use `getApplicativeIOValidation` and `getAltIOValidation`.
+Use [`getApplicativeIOValidation`](#getapplicativeiovalidation) and [`getAltIOValidation`](#getaltiovalidation).
 
 **Signature**
 
@@ -948,10 +972,7 @@ Added in v2.0.0
 
 ## ~~getSemigroup~~
 
-Use `Apply.getApplySemigroup` instead.
-
-Semigroup returning the left-most non-`Left` value. If both operands are `Right`s then the inner values are
-concatenated using the provided `Semigroup`
+Use [`getApplySemigroup`](./Apply.ts.html#getapplysemigroup) instead.
 
 **Signature**
 
@@ -993,7 +1014,7 @@ Added in v2.10.0
 
 Constructs a new `IOEither` from a function that performs a side effect and might throw
 
-See also [`tryCatchK`](#tryCatchK).
+See also [`tryCatchK`](#trycatchk).
 
 **Signature**
 
@@ -1030,7 +1051,49 @@ export interface IOEither<E, A> extends IO<Either<E, A>> {}
 
 Added in v2.0.0
 
+# natural transformations
+
+## fromEither
+
+**Signature**
+
+```ts
+export declare const fromEither: NaturalTransformation22<'Either', 'IOEither'>
+```
+
+Added in v2.0.0
+
+## fromIO
+
+**Signature**
+
+```ts
+export declare const fromIO: NaturalTransformation12<'IO', 'IOEither'>
+```
+
+Added in v2.7.0
+
+## fromOption
+
+**Signature**
+
+```ts
+export declare const fromOption: <E>(onNone: Lazy<E>) => NaturalTransformation12C<'Option', 'IOEither', E>
+```
+
+Added in v2.0.0
+
 # utils
+
+## ApT
+
+**Signature**
+
+```ts
+export declare const ApT: IOEither<never, readonly []>
+```
+
+Added in v2.11.0
 
 ## Do
 
@@ -1125,8 +1188,6 @@ Added in v2.0.0
 
 ## sequenceArray
 
-Equivalent to `ReadonlyArray#sequence(Applicative)`.
-
 **Signature**
 
 ```ts
@@ -1137,8 +1198,6 @@ Added in v2.9.0
 
 ## sequenceSeqArray
 
-Equivalent to `ReadonlyArray#sequence(ApplicativeSeq)`.
-
 **Signature**
 
 ```ts
@@ -1148,8 +1207,6 @@ export declare const sequenceSeqArray: <E, A>(arr: readonly IOEither<E, A>[]) =>
 Added in v2.9.0
 
 ## traverseArray
-
-Equivalent to `ReadonlyArray#traverse(Applicative)`.
 
 **Signature**
 
@@ -1163,8 +1220,6 @@ Added in v2.9.0
 
 ## traverseArrayWithIndex
 
-Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
-
 **Signature**
 
 ```ts
@@ -1175,9 +1230,63 @@ export declare const traverseArrayWithIndex: <A, E, B>(
 
 Added in v2.9.0
 
-## traverseSeqArray
+## traverseReadonlyArrayWithIndex
 
-Equivalent to `ReadonlyArray#traverse(ApplicativeSeq)`.
+Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativePar)`.
+
+**Signature**
+
+```ts
+export declare const traverseReadonlyArrayWithIndex: <A, E, B>(
+  f: (index: number, a: A) => IOEither<E, B>
+) => (as: readonly A[]) => IOEither<E, readonly B[]>
+```
+
+Added in v2.11.0
+
+## traverseReadonlyArrayWithIndexSeq
+
+Equivalent to `ReadonlyArray#traverseWithIndex(ApplicativeSeq)`.
+
+**Signature**
+
+```ts
+export declare const traverseReadonlyArrayWithIndexSeq: <A, E, B>(
+  f: (index: number, a: A) => IOEither<E, B>
+) => (as: readonly A[]) => IOEither<E, readonly B[]>
+```
+
+Added in v2.11.0
+
+## traverseReadonlyNonEmptyArrayWithIndex
+
+Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(ApplicativePar)`.
+
+**Signature**
+
+```ts
+export declare const traverseReadonlyNonEmptyArrayWithIndex: <A, E, B>(
+  f: (index: number, a: A) => IOEither<E, B>
+) => (as: ReadonlyNonEmptyArray<A>) => IOEither<E, ReadonlyNonEmptyArray<B>>
+```
+
+Added in v2.11.0
+
+## traverseReadonlyNonEmptyArrayWithIndexSeq
+
+Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(ApplicativeSeq)`.
+
+**Signature**
+
+```ts
+export declare const traverseReadonlyNonEmptyArrayWithIndexSeq: <A, E, B>(
+  f: (index: number, a: A) => IOEither<E, B>
+) => (as: ReadonlyNonEmptyArray<A>) => IOEither<E, ReadonlyNonEmptyArray<B>>
+```
+
+Added in v2.11.0
+
+## traverseSeqArray
 
 **Signature**
 
@@ -1190,8 +1299,6 @@ export declare const traverseSeqArray: <A, E, B>(
 Added in v2.9.0
 
 ## traverseSeqArrayWithIndex
-
-Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
 
 **Signature**
 

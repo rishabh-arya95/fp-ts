@@ -1,6 +1,6 @@
 ---
 title: FoldableWithIndex.ts
-nav_order: 33
+nav_order: 34
 parent: Modules
 ---
 
@@ -345,6 +345,14 @@ export interface FoldableWithIndexComposition<F, FI, G, GI> extends FoldableComp
 Added in v2.0.0
 
 ## ~~getFoldableWithIndexComposition~~
+
+Use
+
+- [reduceWithIndex](#reducewithindex)
+- [foldMapWithIndex](#foldmapwithindex)
+- [reduceRightWithIndex](#reducerightwithindex)
+
+instead.
 
 **Signature**
 

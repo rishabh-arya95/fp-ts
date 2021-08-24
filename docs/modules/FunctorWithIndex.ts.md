@@ -1,6 +1,6 @@
 ---
 title: FunctorWithIndex.ts
-nav_order: 39
+nav_order: 43
 parent: Modules
 ---
 
@@ -264,6 +264,8 @@ export interface FunctorWithIndexComposition<F, FI, G, GI> extends FunctorCompos
 Added in v2.0.0
 
 ## ~~getFunctorWithIndexComposition~~
+
+Use [`mapWithIndex`](#mapwithindex) instead.
 
 **Signature**
 

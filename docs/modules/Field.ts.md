@@ -1,6 +1,6 @@
 ---
 title: Field.ts
-nav_order: 29
+nav_order: 30
 parent: Modules
 ---
 
@@ -27,6 +27,8 @@ Added in v2.0.0
 # instances
 
 ## ~~fieldNumber~~
+
+Use [`Field`](./number.ts.html#field) instead.
 
 **Signature**
 
