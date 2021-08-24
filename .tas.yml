@@ -10,8 +10,9 @@ postMerge:
   strategy: 
     threshold: <5|100s|30m|6h>
     type: <commit|time>
-postRun: 
-  - "npm run docs"
+postRun:
+  - "echo 'Done'"
+#  - "npm run docs"
 preMerge: 
   pattern: 
     - ./test/IO.ts
@@ -21,7 +22,7 @@ preMerge:
     - ./test/Date.ts
 preRun: 
   - "npm ci"
-  - "npm run lint"
-  - "npm run prettier"
-  - "npm run dtslint"
-  - "npm run jest-clear-cache"
+#  - "npm run lint"
+#  - "npm run prettier"
+#  - "npm run dtslint"
+#  - "npm run jest-clear-cache"
