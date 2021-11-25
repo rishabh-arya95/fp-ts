@@ -1,37 +1,15 @@
 ---
 framework: jest
-docker:
-  auth:
-    password: $DOCKERHUB_PASSWORD12
-    username: mydockerhub-user
-  image: "lambdatest/<language>:<version TAG>"
-modifiers:
-  - type: jest
-    config: cnf/mocha.ini
-postmerge:
+postMerge:
   pattern:
-  - "./test/IO.ts"
-  - "./test/Json.ts"
-  - "./test/Ring.ts"
-  - "./test/Foldable.ts"
-  - "./test/Date.ts"
-  strategy:
-    threshold: <5|100s|30m|6h>
-    type: <commit|time>
-premerge:
-  - "./test/IO.ts"
-  - "./test/Json.ts"
-  - "./test/Ring.ts"
-  - "./test/Foldable.ts"
-  - "./test/Date.ts"
+  - "./test/*.ts"
+preMerge:
+  - "./test/*.ts"
 stability:
   consecutive_runs: 5
 prerun:
   - npm ci
-  - npm run lint 
-  - npm run prettier
-  - npm run dtslint
-  - npm run jest-clear-cache
 postrun:
-  - npm run docs
+  # - npm run docs
+  - npm run lint 
 version: 2.0
