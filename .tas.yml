@@ -4,9 +4,8 @@ postMerge:
   pattern:
   - "./test/*.ts"
 preMerge:
+  pattern:
   - "./test/*.ts"
-stability:
-  consecutive_runs: 5
 prerun:
   - npm ci
 postrun:
